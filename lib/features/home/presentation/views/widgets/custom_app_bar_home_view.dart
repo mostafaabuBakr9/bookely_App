@@ -1,6 +1,7 @@
 import 'package:bookly/core/utils/assets.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:go_router/go_router.dart';
 
 class CustomAppBarHomeView extends StatelessWidget {
   const CustomAppBarHomeView({super.key});
@@ -17,7 +18,9 @@ class CustomAppBarHomeView extends StatelessWidget {
             height: 20,
           ),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).push('/SearchView');
+              },
               icon: Icon(
                 FontAwesomeIcons.magnifyingGlass,
                 color: Colors.white,
