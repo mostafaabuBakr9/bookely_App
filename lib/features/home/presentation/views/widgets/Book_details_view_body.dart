@@ -1,3 +1,4 @@
+import 'package:bookly/core/utils/assets.dart';
 import 'package:bookly/core/utils/styles.dart';
 import 'package:bookly/features/home/presentation/views/widgets/Book_details_info.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_button.dart';
@@ -21,7 +22,7 @@ class BookDetailsViewBody extends StatelessWidget {
             SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.4,
                 child: const CustomListViewItem(
-                  imageUrl: 'assets/images/test_image.png',
+                  imageUrl: Assets.testImage,
                 )),
             const SizedBox(
               height: 40,
