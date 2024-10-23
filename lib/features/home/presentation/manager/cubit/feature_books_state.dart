@@ -1,5 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-part of 'featured_books_cubit.dart';
+part of 'feature_books_cubit.dart';
 
 abstract class FeaturedBooksState extends Equatable {
   const FeaturedBooksState();
@@ -21,5 +20,5 @@ class FeaturedBooksSuccess extends FeaturedBooksState {
 
 class FeaturedBooksFailure extends FeaturedBooksState {
   final String error;
-  const FeaturedBooksFailure(this.error);
+  const FeaturedBooksFailure({required this.error});
 }
