@@ -20,7 +20,9 @@ class BookDetailsViewBody extends StatelessWidget {
             const CustomAppBarBookDetails(),
             SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.4,
-                child: const CustomListViewItem()),
+                child: const CustomListViewItem(
+                  imageUrl: 'assets/images/test_image.png',
+                )),
             const SizedBox(
               height: 40,
             ),

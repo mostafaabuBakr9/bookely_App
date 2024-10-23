@@ -20,6 +20,9 @@ class HomeViewBody extends StatelessWidget {
               children: [
                 const CustomAppBarHomeView(),
                 const FutureBooksListView(),
+                SizedBox(
+                  height: 30,
+                ),
                 Text(
                   'Best Seller',
                   style: Styles.googletextStyle18semiBold,

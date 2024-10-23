@@ -22,10 +22,16 @@ class FutureBooksListView extends StatelessWidget {
             height: MediaQuery.sizeOf(context).height * 0.30,
             child: ListView.builder(
               padding: EdgeInsets.zero,
-              itemCount: 10,
+              itemCount: state.books.length,
               scrollDirection: Axis.horizontal,
+              physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                return const CustomListViewItem();
+                return Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: CustomListViewItem(
+                      imageUrl: state
+                          .books[index].volumeInfo!.imageLinks!.thumbnail!),
+                );
               },
             ),
           );
