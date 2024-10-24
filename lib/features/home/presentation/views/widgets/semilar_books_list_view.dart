@@ -1,22 +1,22 @@
 import 'package:bookly/core/widgets/custom_error_widget.dart';
 import 'package:bookly/core/widgets/custom_loading_indicator.dart';
-import 'package:bookly/features/home/presentation/manager/feature_books_cubit/feature_books_cubit.dart';
-import 'package:bookly/features/home/presentation/views/widgets/custom_list_view_item.dart';
+import 'package:bookly/features/home/presentation/manager/semilar_books_cubit/similar_books_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:go_router/go_router.dart';
 
-class FutureBooksListView extends StatelessWidget {
-  const FutureBooksListView({super.key});
+import 'custom_list_view_item.dart';
+
+class SemilarBooksListView extends StatelessWidget {
+  const SemilarBooksListView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    var blocConsumer = BlocConsumer<FeatureBooksCubit, FeaturedBooksState>(
+    var blocConsumer = BlocConsumer<SimilarBooksCubit, SimilarBooksState>(
       listener: (context, state) {
         // TODO: implement listener
       },
       builder: (context, state) {
-        if (state is FeaturedBooksSuccess) {
+        if (state is SimilarBooksSuccess) {
           return SizedBox(
             height: MediaQuery.sizeOf(context).height * 0.25,
             child: ListView.builder(
@@ -27,22 +27,14 @@ class FutureBooksListView extends StatelessWidget {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: GestureDetector(
-                    onTap: () {
-                      GoRouter.of(context).push(
-                        '/BookDetailsView',
-                        extra: state.books[index],
-                      );
-                    },
-                    child: CustomListViewItem(
-                        imageUrl: state
-                            .books[index].volumeInfo!.imageLinks!.thumbnail!),
-                  ),
+                  child: CustomListViewItem(
+                      imageUrl: state
+                          .books[index].volumeInfo!.imageLinks!.thumbnail!),
                 );
               },
             ),
           );
-        } else if (state is FeaturedBooksFailure) {
+        } else if (state is SimilarBooksFailure) {
           return CustomErrorWidget(
             errorMessage: state.error,
           );

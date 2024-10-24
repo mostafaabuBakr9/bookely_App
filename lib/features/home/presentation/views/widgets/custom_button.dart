@@ -1,9 +1,11 @@
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CustomButton extends StatelessWidget {
-  const CustomButton({super.key});
-
+  const CustomButton({super.key, required this.bookModel});
+  final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -43,7 +45,15 @@ class CustomButton extends StatelessWidget {
                         topRight: Radius.circular(12),
                         bottomRight: Radius.circular(12))),
               ),
-              onPressed: () => {},
+              onPressed: () async {
+                final Uri uri = Uri.parse(bookModel.volumeInfo!.previewLink!);
+
+                if (await canLaunchUrl(uri)) {
+                  await launchUrl(uri);
+                } else {
+                  throw 'Could not launch $uri';
+                }
+              },
               child: Text('Free preview',
                   style: TextStyle(
                     fontSize: 20,

@@ -12,26 +12,26 @@ class HomeViewBody extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
+        const SliverToBoxAdapter(
+          child: CustomAppBarHomeView(),
+        ),
+        const SliverToBoxAdapter(
+          child: FutureBooksListView(),
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(
+            height: 30,
+          ),
+        ),
         SliverToBoxAdapter(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 5),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CustomAppBarHomeView(),
-                const FutureBooksListView(),
-                const SizedBox(
-                  height: 30,
-                ),
-                Text(
-                  'Best Seller',
-                  style: Styles.googletextStyle18semiBold,
-                ),
-                const SizedBox(
-                  height: 10,
-                )
-              ],
-            ),
+          child: Text(
+            'Best Seller',
+            style: Styles.googletextStyle18semiBold,
+          ),
+        ),
+        const SliverToBoxAdapter(
+          child: SizedBox(
+            height: 10,
           ),
         ),
         const SliverFillRemaining(

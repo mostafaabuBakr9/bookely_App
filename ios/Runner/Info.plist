@@ -46,4 +46,8 @@
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
 </dict>
+<key>LSApplicationQueriesSchemes</key>
+<array>
+  <string>https</string>
+</array>
 </plist>

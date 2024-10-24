@@ -17,7 +17,9 @@ class BestSellerListViewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        GoRouter.of(context).push('/BookDetailsView');
+        GoRouter.of(context).push('/BookDetailsView',
+        extra: bookModel
+        );
       },
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
         bestselleritemphoto(

@@ -56,7 +56,8 @@ class HomeRepoImpl extends HomeRepo {
   }
 
   @override
-  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks() async {
+  Future<Either<Failure, List<BookModel>>> fetchSimilarBooks(
+      {required String category}) async {
     try {
       var data = await apiService.get(
           endPoint:
@@ -68,7 +69,7 @@ class HomeRepoImpl extends HomeRepo {
 
       return right(books);
     } catch (e) {
-      if (e is DioError) {
+      if (e is DioException) {
         return left(
           ServerFailure.fromDioError(e),
         );

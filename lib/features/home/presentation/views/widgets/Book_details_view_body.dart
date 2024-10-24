@@ -1,16 +1,19 @@
-import 'package:bookly/core/utils/assets.dart';
 import 'package:bookly/core/utils/styles.dart';
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
 import 'package:bookly/features/home/presentation/views/widgets/Book_details_info.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_button.dart';
 import 'package:bookly/features/home/presentation/views/widgets/custom_list_view_item.dart';
+import 'package:bookly/features/home/presentation/views/widgets/semilar_books_list_view.dart';
 import 'package:flutter/material.dart';
 
 import 'custom_app_bar_book_details.dart';
-import 'future_Books_list_view.dart';
 
 class BookDetailsViewBody extends StatelessWidget {
-  const BookDetailsViewBody({super.key});
-
+  final BookModel bookModel;
+  const BookDetailsViewBody({
+    super.key,
+    required this.bookModel,
+  });
   @override
   Widget build(BuildContext context) {
     return CustomScrollView(slivers: [
@@ -21,17 +24,21 @@ class BookDetailsViewBody extends StatelessWidget {
             const CustomAppBarBookDetails(),
             SizedBox(
                 height: MediaQuery.sizeOf(context).height * 0.4,
-                child: const CustomListViewItem(
-                  imageUrl: Assets.testImage,
+                child: CustomListViewItem(
+                  imageUrl: bookModel.volumeInfo!.imageLinks!.thumbnail!,
                 )),
             const SizedBox(
               height: 40,
             ),
-            const BookDetailsInfo(),
+            BookDetailsInfo(
+              bookModel: bookModel,
+            ),
             const SizedBox(
               height: 40,
             ),
-            const CustomButton(),
+            CustomButton(
+              bookModel: bookModel,
+            ),
             const SizedBox(
               height: 20,
             ),
@@ -50,7 +57,7 @@ class BookDetailsViewBody extends StatelessWidget {
             ),
             SizedBox(
               height: MediaQuery.sizeOf(context).height * 0.18,
-              child: const FutureBooksListView(),
+              child: const SemilarBooksListView(),
             )
           ],
         ),
