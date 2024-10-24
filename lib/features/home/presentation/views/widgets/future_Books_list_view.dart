@@ -17,7 +17,7 @@ class FutureBooksListView extends StatelessWidget {
       builder: (context, state) {
         if (state is FeaturedBooksSuccess) {
           return SizedBox(
-            height: MediaQuery.sizeOf(context).height * 0.30,
+            height: MediaQuery.sizeOf(context).height * 0.25,
             child: ListView.builder(
               padding: EdgeInsets.zero,
               itemCount: state.books.length,

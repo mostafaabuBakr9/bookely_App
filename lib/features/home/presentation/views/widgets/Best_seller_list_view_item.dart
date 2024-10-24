@@ -1,13 +1,18 @@
-import 'package:bookly/core/utils/assets.dart';
 import 'package:bookly/core/utils/styles.dart';
+import 'package:bookly/features/home/data/models/book_model/book_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 import 'Book_rating.dart';
 
 class BestSellerListViewItem extends StatelessWidget {
-  const BestSellerListViewItem({super.key});
+  const BestSellerListViewItem({
+    super.key,
+    required this.bookModel,
+  });
 
+  final BookModel bookModel;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -15,7 +20,9 @@ class BestSellerListViewItem extends StatelessWidget {
         GoRouter.of(context).push('/BookDetailsView');
       },
       child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        const bestselleritemphoto(),
+        bestselleritemphoto(
+          imageUrl: bookModel.volumeInfo!.imageLinks!.thumbnail!,
+        ),
         const SizedBox(
           width: 30,
         ),
@@ -26,25 +33,25 @@ class BestSellerListViewItem extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.sizeOf(context).width * 0.5,
                 child: Text(
-                  'Harry Potter and the Goblet of Fire',
+                  bookModel.volumeInfo!.title!,
                   style: Styles.gTSectraFineTextStyle20.copyWith(),
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Text(
-                'J.K. Rowling',
+                bookModel.volumeInfo!.authors![0],
                 style: Styles.googletextStyle14medium,
               ),
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                 Text(
-                  '19.99 €',
+                  'Free',
                   style: Styles.googletextStyle20Bold,
                 ),
-                BookRating(),
+                const BookRating(),
               ])
             ],
           ),
@@ -57,19 +64,24 @@ class BestSellerListViewItem extends StatelessWidget {
 class bestselleritemphoto extends StatelessWidget {
   const bestselleritemphoto({
     super.key,
+    required this.imageUrl,
   });
-
+  final String imageUrl;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: 130,
-      child: AspectRatio(
-        aspectRatio: 1 / 1.4,
-        child: Container(
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(12),
-                image: const DecorationImage(
-                    image: AssetImage(Assets.testImage), fit: BoxFit.fill))),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(16),
+        child: AspectRatio(
+            aspectRatio: 1 / 1.4,
+            child: CachedNetworkImage(
+              imageUrl: imageUrl,
+              fit: BoxFit.fill,
+              errorWidget: (context, url, error) {
+                return const Icon(Icons.error);
+              },
+            )),
       ),
     );
   }

@@ -11,7 +11,7 @@ class HomeViewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: CustomScrollView(slivers: [
+      child: CustomScrollView(physics: const BouncingScrollPhysics(), slivers: [
         SliverToBoxAdapter(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5),
@@ -20,23 +20,26 @@ class HomeViewBody extends StatelessWidget {
               children: [
                 const CustomAppBarHomeView(),
                 const FutureBooksListView(),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Text(
                   'Best Seller',
                   style: Styles.googletextStyle18semiBold,
                 ),
+                const SizedBox(
+                  height: 10,
+                )
               ],
             ),
           ),
         ),
         const SliverFillRemaining(
           child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 5),
+            padding: EdgeInsets.symmetric(horizontal: 15),
             child: BestSellerListView(),
           ),
-        )
+        ),
       ]),
     );
   }
